@@ -1,0 +1,41 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:entities="clr-namespace:ArtworkManager.Database.Entities"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ArtworkManager.Windows.ManageDatabaseWindow"
+        Title="ManageDatabaseWindow"
+        Activated="Window_OnActivated"
+        WindowStartupLocation="CenterScreen">
+   <Grid>
+       <SplitView IsPaneOpen="True"
+                  DisplayMode="Inline"
+                  OpenPaneLength="296">
+           <SplitView.Pane>
+               <ListBox Items="{Binding Tables}" SelectionChanged="SelectingItemsControl_OnSelectionChanged">
+
+               </ListBox>
+           </SplitView.Pane>
+
+           <Grid Margin="20">
+               <DataGrid Items="{Binding TableData}"
+                         IsReadOnly="True"
+                         AutoGenerateColumns="True" CanUserResizeColumns="True" CanUserSortColumns="True"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="DataGrid_OnSelectionChanged">
+                   <DataGrid.ContextMenu>
+                       <ContextMenu>
+                           <MenuItem Header="Open in File Explorer" Command="{Binding OpenFileInExplorer}"/>
+                           <MenuItem Header="Open fullscreen" Command="{Binding OpenFullscreen}"/>
+                           <Separator />
+                           <MenuItem Header="Edit" Command="{Binding EditDatabaseEntry}"/>
+                           <MenuItem Header="Delete"/>
+                       </ContextMenu>
+                   </DataGrid.ContextMenu>
+               </DataGrid>
+           </Grid>
+       </SplitView>
+       
+   </Grid>
+</Window>

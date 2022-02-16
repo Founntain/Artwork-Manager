@@ -3,17 +3,38 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <RootNamespace>ArtworkManager</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
         <None Remove=".gitignore" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.10.11" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.11" />
+        <PackageReference Include="Avalonia" Version="0.10.12" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.12" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.12" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.2" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Classes" />
+      <Compile Update="Windows\EditArtworkWindowViewModel.cs">
+        <DependentUpon>EditArtworkWindow.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Windows\ArtworkBrowserViewModel.cs">
+        <DependentUpon>ArtworkBrowser.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Windows\FullscreenArtworkWindowViewModel.cs">
+        <DependentUpon>FullscreenArtworkWindow.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="MainWindowViewModel.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Windows\SettingsWindowViewModel.cs">
+        <DependentUpon>SettingsWindow.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Windows\ManageDatabaseWindowViewModel.cs">
+        <DependentUpon>ManageDatabaseWindow.axaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

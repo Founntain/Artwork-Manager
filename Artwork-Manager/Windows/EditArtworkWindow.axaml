@@ -1,0 +1,57 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:classes="clr-namespace:ArtworkManager.Classes"
+        xmlns:valueConverter="clr-namespace:ArtworkManager.Classes.ValueConverter"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ArtworkManager.Windows.EditArtworkWindow"
+        Title="EditArtworkWindow"
+        WindowStartupLocation="CenterScreen"
+        Activated="Window_OnActivated">
+    
+    <Window.Resources>
+        <valueConverter:BitmapValueConverter x:Key="bitmapConverter"/>
+    </Window.Resources>
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" x:DataType="classes:AdvancedArtwork" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock Text="{Binding Artwork.IdString}" />
+            <TextBlock Text="{Binding Artwork.CreationTimeString}" />
+            
+            <TextBlock Text="Name:" />
+            <TextBox Watermark="Edit Name" Text="{Binding Artwork.Name}" HorizontalAlignment="Stretch" />
+            
+            <TextBlock Text="Description"/>
+            <TextBox Watermark="Edit Description" Text="{Binding Artwork.Description}" HorizontalAlignment="Stretch" />
+            
+            <TextBlock Text="Artwork type" />
+            <ComboBox SelectedItem="{Binding Artwork.ArtworkType}" Items="{Binding ArtworkTypes}" HorizontalAlignment="Stretch"/>
+            
+            <TextBlock Text="Artwork acquired type" />
+            <ComboBox SelectedItem="{Binding Artwork.ArtworkAcquiredType}" Items="{Binding ArtworkAcquieredTypes}" HorizontalAlignment="Stretch"/>
+            
+            <TextBlock Text="{Binding Artwork.Filepath, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <Button Content="Change Artwork filepath" Command="{Binding OnChangeFilepathCommand}" HorizontalAlignment="Stretch"/>
+
+            
+            <CheckBox Content="Is NSFW" IsChecked="{Binding Artwork.IsNsfw}" />
+        </StackPanel>
+        
+        <Grid Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                       Stretch="Uniform" Source="{Binding Artwork.Filepath, Converter={StaticResource bitmapConverter}}"
+                       PointerReleased="Image_OnPointerReleased"
+                       Cursor="Hand"/>
+        </Grid>
+        
+        <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Save changes" Command="{Binding OnSaveCommand}"/>
+    </Grid>
+</Window>
+

@@ -3,20 +3,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Artwork_Manager.MainWindow"
+        x:Class="ArtworkManager.MainWindow"
         Foreground="Black"
-        Title="Artwork_Manager">
+        Title="Artwork_Manager"
+        WindowStartupLocation="CenterScreen">
+    
     <Grid>
-        <TextBlock Text="Welcome"></TextBlock>
-        <SplitView>
-            <SplitView.Pane>
-                
-            </SplitView.Pane>
-            <SplitView.Content>
-                <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Manage Artworks" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding OpenArtworkBrowser}" />
+
+            <Grid Column="1">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                    <Button Content="Manage Database" HorizontalAlignment="Stretch" Margin="0 5" Command="{Binding OpenManageDatabaseWindow}"/>
                     
-                </Grid>
-            </SplitView.Content>
-        </SplitView>
+                    <Border BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#FF000000" Margin="0 5" />
+                    
+                    <Button Content="Add Artwork"  HorizontalAlignment="Stretch" Margin="0 2" />
+                    <Button Content="Add Character"  HorizontalAlignment="Stretch" Margin="0 2" />
+                    <Button Content="Add Collection"  HorizontalAlignment="Stretch" Margin="0 2" />
+                </StackPanel>
+            </Grid>
+
+            <Button Grid.Column="2" Content="Settings" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding OpenSettingsWindow}" />
+        </Grid>
     </Grid>
 </Window>

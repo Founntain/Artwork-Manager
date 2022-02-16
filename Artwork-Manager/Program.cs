@@ -1,9 +1,6 @@
-﻿using System;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
+﻿using Avalonia;
 
-namespace Artwork_Manager
+namespace ArtworkManager
 {
     class Program
     {

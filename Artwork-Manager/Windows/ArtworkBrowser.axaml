@@ -1,0 +1,105 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:valueConverter="clr-namespace:ArtworkManager.Classes.ValueConverter"
+        xmlns:entities="clr-namespace:ArtworkManager.Database.Entities"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ArtworkManager.Windows.ArtworkBrowser"
+        Title="ArtworkBrowser"
+        Activated="WindowBase_OnActivated"
+        Closed="WindowBase_OnClosed"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <valueConverter:BitmapValueConverter x:Key="bitmapConverter" />
+        <valueConverter:NsfwValueConverter x:Key="nsfwConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <SplitView IsPaneOpen="True"
+                   DisplayMode="Inline"
+                   OpenPaneLength="296">
+            <SplitView.Pane>
+                <ListBox Items="{Binding Artworks}" SelectionChanged="SelectingItemsControl_OnSelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="entities:Artwork">
+                            <Grid>
+                                <DockPanel>
+                                    <TextBlock Text="{Binding Name}"
+                                               Foreground="{Binding IsNsfw, Converter={StaticResource nsfwConverter}}"
+                                               VerticalAlignment="Center" />
+                                </DockPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </SplitView.Pane>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*" />
+                    <ColumnDefinition Width="30*" />
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       Source="{Binding SelectedArtwork.Filepath, Converter={StaticResource bitmapConverter}}"
+                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Uniform" />
+
+                <Grid Column="1" Background="#09000000">
+
+                    <Grid Margin="10">
+                        <StackPanel Margin="5">
+                            <StackPanel HorizontalAlignment="Stretch">
+                                <TextBlock Text="Artwork Details" FontWeight="Bold" FontSize="20"
+                                           HorizontalAlignment="Center" />
+
+                                <TextBlock Text="Name:" FontWeight="Bold" HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding SelectedArtwork.Name}" HorizontalAlignment="Left"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Stretch" Margin="0 5">
+                                <TextBlock Text="Description:" FontWeight="Bold" HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding SelectedArtwork.Description}" HorizontalAlignment="Left"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Stretch" Margin="0 5">
+                                <TextBlock Text="Artwork type:" FontWeight="Bold" HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding SelectedArtwork.ArtworkType}" TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Stretch" Margin="0 5">
+                                <TextBlock Text="Artwork acquiered type:" FontWeight="Bold" HorizontalAlignment="Left"
+                                           TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding SelectedArtwork.ArtworkAcquiredType}" />
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Stretch" Margin="0 5">
+                                <TextBlock Text="Artwork location:" FontWeight="Bold" HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding SelectedArtwork.Filepath}" TextWrapping="Wrap" />
+
+                                <CheckBox Content="Is NSFW" FontWeight="Bold" IsHitTestVisible="False"
+                                          IsChecked="{Binding SelectedArtwork.IsNsfw}" />
+                            </StackPanel>
+                            
+                            <ItemsControl Items="{Binding SelectedArtwork.Characters}">
+                                <ItemsControl.DataTemplates>
+                                    <DataTemplate DataType="entities:Character">
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ItemsControl.DataTemplates>
+                            </ItemsControl>
+
+                        </StackPanel>
+
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Open fullscreen" />
+                    </Grid>
+
+                </Grid>
+            </Grid>
+        </SplitView>
+
+    </Grid>
+</Window>
