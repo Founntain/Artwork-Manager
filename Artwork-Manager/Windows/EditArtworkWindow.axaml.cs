@@ -1,4 +1,5 @@
 ﻿using ArtworkManager.Classes;
+using ArtworkManager.Database.Contexts;
 using ArtworkManager.Database.Entities;
 using ArtworkManager.ViewModels;
 using Avalonia;
@@ -10,6 +11,8 @@ namespace ArtworkManager.Windows;
 
 public class EditArtworkWindow : Window
 {
+    private DatabaseContext _ctx = new DatabaseContext();
+    
     public EditArtworkWindow()
     {
         InitializeComponent();
@@ -23,7 +26,8 @@ public class EditArtworkWindow : Window
     {
         InitializeComponent();
 
-        DataContext = new EditArtworkWindowViewModel(this, artwork);
+        DataContext = new EditArtworkWindowViewModel(this, artwork, _ctx);
+        
 #if DEBUG
         this.AttachDevTools();
 #endif
@@ -44,5 +48,10 @@ public class EditArtworkWindow : Window
         var vm = (EditArtworkWindowViewModel) DataContext;
         
         var x = new FullscreenArtworkWindow(vm.Artwork.Filepath).ShowDialog(this);
+    }
+
+    private void Window_OnClosed(object? sender, EventArgs e)
+    {
+        _ctx.Dispose();
     }
 }

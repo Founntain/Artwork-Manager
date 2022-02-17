@@ -18,7 +18,7 @@ namespace ArtworkManager
 
         public override void OnFrameworkInitializationCompleted()
         {
-            using (var ctx = new DatabaseContext(true)) { }
+            using (var ctx = new DatabaseContext()) { }
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {

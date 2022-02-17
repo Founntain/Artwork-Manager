@@ -8,7 +8,7 @@ using Avalonia.Controls;
 
 namespace ArtworkManager.ViewModels;
 
-public class ManageDatabaseWindowBaseViewModel : BaseViewModel
+public class ManageDatabaseWindowViewModel : BaseViewModel
 {
     private ObservableCollection<object> _tableData;
     private ObservableCollection<string> _tables;
@@ -45,18 +45,19 @@ public class ManageDatabaseWindowBaseViewModel : BaseViewModel
     }
 
     public void EditDatabaseEntry()
-    { if (SelectedDatabaseEntry.GetType() == typeof(Artwork))
+    { 
+        if (SelectedDatabaseEntry is Artwork)
         {
             var window = new EditArtworkWindow((Artwork) SelectedDatabaseEntry);
             window.Show();
         }
         
-        if (SelectedDatabaseEntry.GetType() == typeof(Artist))
+        if (SelectedDatabaseEntry is Artist)
         {
             
         }
         
-        if (SelectedDatabaseEntry.GetType() == typeof(Collection))
+        if (SelectedDatabaseEntry is Collection)
         {
             
         }

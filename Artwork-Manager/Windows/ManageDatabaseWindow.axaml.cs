@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using ArtworkManager.Database.Contexts;
-using ArtworkManager.Database.Entities;
 using ArtworkManager.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -12,10 +11,10 @@ public class ManageDatabaseWindow : Window
 {
     public ManageDatabaseWindow()
     {
+        DataContext = new ManageDatabaseWindowViewModel();
+        
         InitializeComponent();
 
-        DataContext = new ManageDatabaseWindowBaseViewModel();
-        
 #if DEBUG
         this.AttachDevTools();
 #endif
@@ -28,8 +27,8 @@ public class ManageDatabaseWindow : Window
 
     private void SelectingItemsControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        var vm = (ManageDatabaseWindowBaseViewModel) DataContext;
-        
+        var vm = (ManageDatabaseWindowViewModel) DataContext;
+
         var value = ((ListBox) sender).SelectedItem as string;
 
         using (var ctx = new DatabaseContext())
@@ -38,12 +37,15 @@ public class ManageDatabaseWindow : Window
             {
                 case "Artists":
                     vm.TableData = new ObservableCollection<object>(ctx.Artists.ToList());
+
                     break;
                 case "Artworks":
                     vm.TableData = new ObservableCollection<object>(ctx.Artworks.ToList());
+
                     break;
                 case "Collections":
                     vm.TableData = new ObservableCollection<object>(ctx.Collections.ToList());
+
                     break;
             }
         }
@@ -51,7 +53,7 @@ public class ManageDatabaseWindow : Window
 
     private void Window_OnActivated(object? sender, EventArgs e)
     {
-        var vm = (ManageDatabaseWindowBaseViewModel) DataContext;
+        var vm = (ManageDatabaseWindowViewModel) DataContext;
 
         vm.Tables = new ObservableCollection<string>(new[]
         {
@@ -59,20 +61,20 @@ public class ManageDatabaseWindow : Window
             "Artists",
             "Collections"
         });
-        
+
         using (var ctx = new DatabaseContext())
         {
             var x = new ObservableCollection<object>(ctx.Artworks.ToList());
 
             vm.TableData = x;
         }
-        
+
         var grid = this.FindControl<DataGrid>("DataGridTest");
     }
 
     private void DataGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        var vm = (ManageDatabaseWindowBaseViewModel) DataContext;
+        var vm = (ManageDatabaseWindowViewModel) DataContext;
 
         vm.SelectedDatabaseEntry = ((DataGrid) sender).SelectedItem;
     }

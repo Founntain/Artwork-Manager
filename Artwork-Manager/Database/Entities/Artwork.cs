@@ -5,8 +5,6 @@ namespace ArtworkManager.Database.Entities;
 
 public class Artwork : BaseEntity
 {
-    public ulong? FolderId { get; set; }
-
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string Filepath { get; set; } = null!;

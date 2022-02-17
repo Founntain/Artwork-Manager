@@ -1,28 +1,40 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ArtworkManager.Classes;
 using ArtworkManager.Database.Contexts;
 using ArtworkManager.Database.Entities;
 using ArtworkManager.Enums;
-using Avalonia;
 using Avalonia.Controls;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ArtworkManager.ViewModels;
 
 public class EditArtworkWindowViewModel : BaseViewModel
 {
-    private Window Window;
-    
+    private readonly DatabaseContext _ctx;
+    private readonly Window _window;
+
+    private ICollection<Artist> _artists;
+
     private AdvancedArtwork _artwork;
+    private ICollection<Character> _characters;
     private ArtworkType _selectedArtworkType;
+
+    public EditArtworkWindowViewModel(Window window, Artwork artwork, DatabaseContext ctx)
+    {
+        _window = window;
+        Artwork = new AdvancedArtwork(artwork);
+
+        _ctx = ctx;
+
+        Characters = _ctx.Characters.ToList();
+        Artists = _ctx.Artists.ToList();
+    }
 
     public AdvancedArtwork Artwork
     {
         get => _artwork;
         set
         {
-            _artwork = value; 
+            _artwork = value;
             OnPropertyChanged();
         }
     }
@@ -32,52 +44,52 @@ public class EditArtworkWindowViewModel : BaseViewModel
         get => _selectedArtworkType;
         set
         {
-            _selectedArtworkType = value; 
+            _selectedArtworkType = value;
             OnPropertyChanged();
         }
     }
 
-    public IEnumerable<ArtworkType> ArtworkTypes
+    public IEnumerable<ArtworkType> ArtworkTypes => Enum.GetValues<ArtworkType>();
+
+    public IEnumerable<ArtworkAcquiredType> ArtworkAcquieredTypes => Enum.GetValues<ArtworkAcquiredType>();
+
+    public ICollection<Character> Characters
     {
-        get
+        get => _characters;
+        set
         {
-            return Enum.GetValues<ArtworkType>();
-        }
-    }
-    
-    public IEnumerable<ArtworkAcquiredType> ArtworkAcquieredTypes
-    {
-        get
-        {
-            return Enum.GetValues<ArtworkAcquiredType>();
+            _characters = value;
+            OnPropertyChanged();
         }
     }
 
-    public EditArtworkWindowViewModel(Window window, Artwork artwork)
+    public ICollection<Artist> Artists
     {
-        Window = window;
-        Artwork = new AdvancedArtwork(artwork);
+        get => _artists;
+        set
+        {
+            _artists = value;
+            OnPropertyChanged();
+        }
     }
 
     public async Task OnSaveCommand()
     {
-        using (var ctx = new DatabaseContext())
-        {
-            var artwork = ctx.Artworks.FirstOrDefault(x => x.Id == Artwork.Id);
+        var artwork = _ctx.Artworks.FirstOrDefault(x => x.Id == Artwork.Id);
 
-            if (artwork == null) return;
+        if (artwork == null) return;
 
-            artwork.Name = Artwork.Name;
-            artwork.Description = Artwork.Description;
-            artwork.Filepath = Artwork.Filepath;
-            artwork.ArtworkType = Artwork.ArtworkType;
-            artwork.ArtworkAcquiredType = Artwork.ArtworkAcquiredType;
-            artwork.IsNsfw = Artwork.IsNsfw;
+        artwork.Name = Artwork.Name;
+        artwork.Description = Artwork.Description;
+        artwork.Filepath = Artwork.Filepath;
+        artwork.ArtworkType = Artwork.ArtworkType;
+        artwork.ArtworkAcquiredType = Artwork.ArtworkAcquiredType;
+        artwork.IsNsfw = Artwork.IsNsfw;
 
-            await ctx.SaveChangesAsync();
-        }
-        
-        Window.Close();
+        await _ctx.SaveChangesAsync();
+
+
+        _window.Close();
     }
 
     public async Task OnChangeFilepathCommand()
@@ -86,7 +98,7 @@ public class EditArtworkWindowViewModel : BaseViewModel
 
         dialog.AllowMultiple = false;
 
-        var result = await dialog.ShowAsync(Window);
+        var result = await dialog.ShowAsync(_window);
 
         var path = result.FirstOrDefault();
 

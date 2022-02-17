@@ -33,8 +33,22 @@ public class SettingsWindowBaseViewModel : BaseViewModel
                 Name = "Founntain",
                 Description = "Test Description"
             };
+            
+            var character2 = new Character
+            {
+                Name = "MohreGregs",
+                Description = "Test Description"
+            };
+            
+            var character3 = new Character
+            {
+                Name = "Wolfriel",
+                Description = "Test Description"
+            };
 
             await ctx.Characters.AddAsync(character);
+            await ctx.Characters.AddAsync(character2);
+            await ctx.Characters.AddAsync(character3);
 
             await ctx.SaveChangesAsync();
             
@@ -51,6 +65,10 @@ public class SettingsWindowBaseViewModel : BaseViewModel
                 };
 
                 art.Characters.Add(character);
+
+                var artist = ctx.Artists.FirstOrDefault(x => file.ToLower().Contains(x.Name.ToLower()));
+                
+                art.Artists.Add(artist);
 
                 await ctx.Artworks.AddAsync(art);
             }

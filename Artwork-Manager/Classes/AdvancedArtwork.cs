@@ -34,10 +34,12 @@ public class AdvancedArtwork : Artwork
         CreationTime = artwork.CreationTime;
         Name = artwork.Name;
         Description = artwork.Description;
-        FolderId = artwork.FolderId;
         Filepath = artwork.Filepath;
         ArtworkType = artwork.ArtworkType;
         ArtworkAcquiredType = artwork.ArtworkAcquiredType;
         IsNsfw = artwork.IsNsfw;
+
+        Artists = artwork.Artists;
+        Characters = artwork.Characters;
     }
 }

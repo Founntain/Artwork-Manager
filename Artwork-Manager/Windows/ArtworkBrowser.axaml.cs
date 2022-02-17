@@ -10,15 +10,13 @@ namespace ArtworkManager.Windows;
 
 public class ArtworkBrowser : Window
 {
-    private DatabaseContext _ctx;
+    private DatabaseContext _ctx = new DatabaseContext();
     
     public ArtworkBrowser()
     {
         InitializeComponent();
 
-        _ctx = new DatabaseContext();
-
-        DataContext = new ArtworkBrowserBaseViewModel();
+        DataContext = new ArtworkBrowserBaseViewModel(this);
 
         var vm = (ArtworkBrowserBaseViewModel) DataContext;
 

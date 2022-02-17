@@ -14,6 +14,7 @@
     <Window.Resources>
         <valueConverter:BitmapValueConverter x:Key="bitmapConverter" />
         <valueConverter:NsfwValueConverter x:Key="nsfwConverter" />
+        <valueConverter:NullBooleanConverter x:Key="nullBooleanConverter" />
     </Window.Resources>
 
     <Grid>
@@ -24,12 +25,10 @@
                 <ListBox Items="{Binding Artworks}" SelectionChanged="SelectingItemsControl_OnSelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="entities:Artwork">
-                            <Grid>
-                                <DockPanel>
-                                    <TextBlock Text="{Binding Name}"
-                                               Foreground="{Binding IsNsfw, Converter={StaticResource nsfwConverter}}"
-                                               VerticalAlignment="Center" />
-                                </DockPanel>
+                            <Grid Margin="5">
+                                <TextBlock Text="{Binding Name}"
+                                           Foreground="{Binding IsNsfw, Converter={StaticResource nsfwConverter}}"
+                                           VerticalAlignment="Center" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -57,6 +56,15 @@
                                 <TextBlock Text="Name:" FontWeight="Bold" HorizontalAlignment="Left" />
                                 <TextBlock Text="{Binding SelectedArtwork.Name}" HorizontalAlignment="Left"
                                            TextWrapping="Wrap" />
+                                
+                                <TextBlock Text="Artists" FontWeight="Bold" HorizontalAlignment="Left" />
+                                <ItemsControl Items="{Binding SelectedArtwork.Artists}">
+                                    <ItemsControl.DataTemplates>
+                                        <DataTemplate DataType="entities:Artist">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ItemsControl.DataTemplates>
+                                </ItemsControl>
                             </StackPanel>
 
                             <StackPanel HorizontalAlignment="Stretch" Margin="0 5">
@@ -83,18 +91,32 @@
                                 <CheckBox Content="Is NSFW" FontWeight="Bold" IsHitTestVisible="False"
                                           IsChecked="{Binding SelectedArtwork.IsNsfw}" />
                             </StackPanel>
-                            
-                            <ItemsControl Items="{Binding SelectedArtwork.Characters}">
-                                <ItemsControl.DataTemplates>
-                                    <DataTemplate DataType="entities:Character">
-                                        <TextBlock Text="{Binding Name}" />
-                                    </DataTemplate>
-                                </ItemsControl.DataTemplates>
-                            </ItemsControl>
 
+                            <StackPanel>
+                                <TextBlock Text="Characters in artworks" TextWrapping="Wrap" FontWeight="Bold"/>
+                                <ItemsControl Items="{Binding SelectedArtwork.Characters}">
+                                    <ItemsControl.DataTemplates>
+                                        <DataTemplate DataType="entities:Character">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ItemsControl.DataTemplates>
+                                </ItemsControl>
+                            </StackPanel>
                         </StackPanel>
-
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Open fullscreen" />
+                        
+                        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*" />
+                                <ColumnDefinition Width="50*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Button Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                    Content="Open fullscreen" Command="{Binding OpenFullscreenCommand}"
+                                    IsEnabled="{Binding SelectedArtwork, Converter={StaticResource nullBooleanConverter}}" />
+                            <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                    Content="Edit artwork" Command="{Binding EditArtworkCommand}"
+                                    IsEnabled="{Binding SelectedArtwork, Converter={StaticResource nullBooleanConverter}}" />
+                        </Grid>
                     </Grid>
 
                 </Grid>
