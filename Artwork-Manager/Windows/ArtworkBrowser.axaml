@@ -12,9 +12,9 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <valueConverter:BitmapValueConverter x:Key="bitmapConverter" />
-        <valueConverter:NsfwValueConverter x:Key="nsfwConverter" />
-        <valueConverter:NullBooleanConverter x:Key="nullBooleanConverter" />
+        <valueConverter:BitmapValueConverter x:Key="BitmapConverter" />
+        <valueConverter:NsfwValueConverter x:Key="NsfwConverter" />
+        <valueConverter:NullBooleanConverter x:Key="NullBooleanConverter" />
     </Window.Resources>
 
     <Grid>
@@ -27,7 +27,7 @@
                         <DataTemplate x:DataType="entities:Artwork">
                             <Grid Margin="5">
                                 <TextBlock Text="{Binding Name}"
-                                           Foreground="{Binding IsNsfw, Converter={StaticResource nsfwConverter}}"
+                                           Foreground="{Binding IsNsfw, Converter={StaticResource NsfwConverter}}"
                                            VerticalAlignment="Center" />
                             </Grid>
                         </DataTemplate>
@@ -42,7 +42,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="0"
-                       Source="{Binding SelectedArtwork.Filepath, Converter={StaticResource bitmapConverter}}"
+                       Source="{Binding SelectedArtwork.Filepath, Converter={StaticResource BitmapConverter}}"
                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Uniform" />
 
                 <Grid Column="1" Background="#09000000">
@@ -112,10 +112,10 @@
                             
                             <Button Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                     Content="Open fullscreen" Command="{Binding OpenFullscreenCommand}"
-                                    IsEnabled="{Binding SelectedArtwork, Converter={StaticResource nullBooleanConverter}}" />
+                                    IsEnabled="{Binding SelectedArtwork, Converter={StaticResource NullBooleanConverter}}" />
                             <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                     Content="Edit artwork" Command="{Binding EditArtworkCommand}"
-                                    IsEnabled="{Binding SelectedArtwork, Converter={StaticResource nullBooleanConverter}}" />
+                                    IsEnabled="{Binding SelectedArtwork, Converter={StaticResource NullBooleanConverter}}" />
                         </Grid>
                     </Grid>
 

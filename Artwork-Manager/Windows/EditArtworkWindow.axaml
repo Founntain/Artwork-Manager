@@ -14,6 +14,7 @@
     
     <Window.Resources>
         <valueConverter:BitmapValueConverter x:Key="BitmapConverter"/>
+        <valueConverter:IsEditModeValueConverter x:Key="IsEditModeValueConverter"/>
     </Window.Resources>
     
     <Grid Margin="10">
@@ -73,7 +74,7 @@
                         <DataTemplate DataType="entities:Character">
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" >
                                 <TextBlock Text="{Binding Name}"  VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <Button Content="➕" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Button Content="➕" VerticalAlignment="Center" HorizontalAlignment="Right" Click="AddCharacter_OnClick" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.DataTemplates>
@@ -92,7 +93,7 @@
                         <DataTemplate DataType="entities:Character">
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" >
                                 <TextBlock Text="{Binding Name}"  VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <Button Content="➖" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Button Content="➖" VerticalAlignment="Center" HorizontalAlignment="Right" Click="RemoveCharacter_OnClick" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.DataTemplates>
@@ -118,7 +119,7 @@
                         <DataTemplate DataType="entities:Artist">
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" >
                                 <TextBlock Text="{Binding Name}"  VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <Button Content="➕" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Button Content="➕" VerticalAlignment="Center" HorizontalAlignment="Right" Click="AddArtist_OnClick" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.DataTemplates>
@@ -137,7 +138,7 @@
                         <DataTemplate DataType="entities:Artist">
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" >
                                 <TextBlock Text="{Binding Name}"  VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <Button Content="➖" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Button Content="➖" VerticalAlignment="Center" HorizontalAlignment="Right" Click="RemoveArtist_OnClick" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.DataTemplates>
@@ -152,7 +153,7 @@
                        Cursor="Hand"/>
         </Grid>
         
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save changes" Command="{Binding OnSaveCommand}"/>
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding IsEditMode, Converter={StaticResource IsEditModeValueConverter}}" Command="{Binding OnSaveCommand}"/>
     </Grid>
 </Window>
 

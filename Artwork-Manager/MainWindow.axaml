@@ -25,7 +25,7 @@
                     
                     <Border BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#FF000000" Margin="0 5" />
                     
-                    <Button Content="Add Artwork"  HorizontalAlignment="Stretch" Margin="0 2" />
+                    <Button Content="Add Artwork"  HorizontalAlignment="Stretch" Margin="0 2" Command="{Binding AddNewArtworkCommand}" />
                     <Button Content="Add Character"  HorizontalAlignment="Stretch" Margin="0 2" />
                     <Button Content="Add Collection"  HorizontalAlignment="Stretch" Margin="0 2" />
                 </StackPanel>

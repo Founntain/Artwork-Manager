@@ -4,7 +4,7 @@ namespace ArtworkManager.Classes;
 
 public class AdvancedArtwork : Artwork
 {
-    public string IdString => $"ID: {Id}";
+    public string IdString => $"ID: {(Id > 0 ? Id : "not saved in database yet")}";
     public string CreationTimeString => $"Creation time: {CreationTime}";
 
     public ICollection<string> ArtworkTypeStrings { get; set; } = new List<string>

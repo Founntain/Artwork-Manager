@@ -14,7 +14,7 @@ namespace ArtworkManager
         {
             InitializeComponent();
 
-            DataContext = new MainWindowBaseViewModel();
+            DataContext = new MainWindowBaseViewModel(this);
 #if DEBUG
             this.AttachDevTools();
 #endif

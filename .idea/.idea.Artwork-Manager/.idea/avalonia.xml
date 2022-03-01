@@ -7,6 +7,7 @@
         <entry key="Artwork-Manager/MainWindow.axaml" value="Artwork-Manager/Artwork-Manager.csproj" />
         <entry key="Artwork-Manager/Windows/ArtworkBrowser.axaml" value="Artwork-Manager/Artwork-Manager.csproj" />
         <entry key="Artwork-Manager/Windows/EditArtworkWindow.axaml" value="Artwork-Manager/Artwork-Manager.csproj" />
+        <entry key="Artwork-Manager/Windows/FLoriSucss.axaml" value="Artwork-Manager/Artwork-Manager.csproj" />
         <entry key="Artwork-Manager/Windows/FullscreenArtworkWindow.axaml" value="Artwork-Manager/Artwork-Manager.csproj" />
         <entry key="Artwork-Manager/Windows/ManageDatabaseWindow.axaml" value="Artwork-Manager/Artwork-Manager.csproj" />
         <entry key="Artwork-Manager/Windows/MessageBoxWindow.axaml" value="Artwork-Manager/Artwork-Manager.csproj" />

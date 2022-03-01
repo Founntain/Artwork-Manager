@@ -17,13 +17,32 @@ public class EditArtworkWindowViewModel : BaseViewModel
     private AdvancedArtwork _artwork;
     private ICollection<Character> _characters;
     private ArtworkType _selectedArtworkType;
+    private bool _isEditMode;
 
-    public EditArtworkWindowViewModel(Window window, Artwork artwork, DatabaseContext ctx)
+    public EditArtworkWindowViewModel(Window window, Artwork artwork, DatabaseContext ctx, bool isEditMode = true)
     {
         _window = window;
         Artwork = new AdvancedArtwork(artwork);
 
         _ctx = ctx;
+
+        IsEditMode = isEditMode;
+
+        Characters = _ctx.Characters.ToList();
+        Artists = _ctx.Artists.ToList();
+    }
+    
+    public EditArtworkWindowViewModel(Window window, string artworkPath, DatabaseContext ctx, bool isEditMode = true)
+    {
+        _window = window;
+        Artwork = new AdvancedArtwork
+        {
+            Filepath = artworkPath
+        };
+
+        _ctx = ctx;
+        
+        IsEditMode = isEditMode;
 
         Characters = _ctx.Characters.ToList();
         Artists = _ctx.Artists.ToList();
@@ -73,7 +92,17 @@ public class EditArtworkWindowViewModel : BaseViewModel
         }
     }
 
-    public async Task OnSaveCommand()
+    public bool IsEditMode
+    {
+        get => _isEditMode;
+        set
+        {
+            _isEditMode = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private async Task EditArtwork()
     {
         var artwork = _ctx.Artworks.FirstOrDefault(x => x.Id == Artwork.Id);
 
@@ -87,7 +116,22 @@ public class EditArtworkWindowViewModel : BaseViewModel
         artwork.IsNsfw = Artwork.IsNsfw;
 
         await _ctx.SaveChangesAsync();
+    }
 
+    private async Task AddArtwork()
+    {
+        await _ctx.Artworks.AddAsync(Artwork);
+
+        await _ctx.SaveChangesAsync();
+    }
+
+    public async Task OnSaveCommand()
+    {
+
+        if (IsEditMode)
+            await EditArtwork();
+        else
+            await AddArtwork();
 
         _window.Close();
     }

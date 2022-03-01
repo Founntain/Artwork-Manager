@@ -1,4 +1,5 @@
 using ArtworkManager.Database.Contexts;
+using ArtworkManager.Windows;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
