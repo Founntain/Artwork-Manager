@@ -1,0 +1,74 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:artworkManager="clr-namespace:ArtworkManager"
+        xmlns:controls="clr-namespace:Nein.Controls;assembly=Nein"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:windows="clr-namespace:ArtworkManager.Windows"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ArtworkManager.Windows.MainWindow"
+        Title="Artwork Manager"
+        
+        Foreground="White"
+        FontFamily="Montserrat"
+        
+        WindowStartupLocation="CenterScreen" CanResize="True"
+        
+        FontSize="16"
+
+        Background="Transparent"
+        TransparencyLevelHint="Mica"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome">
+    
+    <Design.DataContext>
+        <windows:MainWindowViewModel />
+    </Design.DataContext>
+
+    <SplitView Name="MainWindowSplitView" DisplayMode="CompactInline" PaneBackground="{DynamicResource AcrylicSecondaryColor}" OpenPaneLength="300" IsPaneOpen="{Binding IsPaneOpen}" Foreground="White">
+        <SplitView.Pane>
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RowDefinitions="*" ColumnDefinitions="*">
+                <Panel Grid.Row="0" Grid.Column="0">
+                    <ExperimentalAcrylicBorder IsHitTestVisible="False" Material="{Binding PanelMaterial}" />
+                </Panel>
+            
+                <StackPanel Grid.Row="0" Grid.Column="0" Spacing="5" Orientation="Vertical">
+                    <StackPanel Spacing="5" Orientation="Horizontal" PointerPressed="Menu_OnClick">
+                        <avalonia:MaterialIcon Kind="Menu" Height="48" Width="48" VerticalAlignment="Center"/> 
+                        <TextBlock Text="Artwork Manager Menu" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Spacing="5" Orientation="Horizontal">
+                        <Button Name="HomeNavigation" Width="48" Height="48" Click="Navigation_Clicked"
+                                Background="Transparent">
+                            <avalonia:MaterialIcon Kind="Home" Height="48" Width="48" />
+                        </Button>
+                        <TextBlock Text="Home" VerticalAlignment="Center" />
+                    </StackPanel>
+                    
+                    <StackPanel Spacing="5" Orientation="Horizontal">
+                        <Button Name="ArtworkBrowserNavigation" Width="48" Height="48" Click="Navigation_Clicked"
+                                Background="Transparent">
+                            <avalonia:MaterialIcon Kind="FormatListBulleted" Height="48" Width="48" />
+                        </Button>
+                        <TextBlock Text="Artwork Browser" VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </SplitView.Pane>
+        
+        <Grid Name="MainGrid" RowDefinitions="50, *, 100" Background="{DynamicResource AcrylicBaseColor}">
+            <Panel Grid.Row="0" Grid.RowSpan="3">
+                <ExperimentalAcrylicBorder IsHitTestVisible="False" Material="{Binding PanelMaterial}" />
+            </Panel>
+
+            <TransitioningContentControl Name="MainViewPanel" Grid.Row="1" Content="{Binding MainView}">
+                <TransitioningContentControl.PageTransition>
+                    <CrossFade Duration="0:00:00.150" />
+                </TransitioningContentControl.PageTransition>
+            </TransitioningContentControl>
+        
+        </Grid>
+    </SplitView>
+</Window>

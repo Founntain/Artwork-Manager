@@ -1,0 +1,35 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Nein.Controls;assembly=Nein"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ArtworkManager.Views.AddCharacterView">
+    <Grid>
+        <StackPanel Spacing="1" Margin="10">
+            <controls:SettingsTitleDisplayer Title="Add a character to the Database" Icon="PersonAdd" />
+            
+            <controls:SettingsDisplayer Title="Character name"
+                                        Description="Name of the character top add"
+                                        Icon="Person">
+
+                <controls:SettingsDisplayer.InteractionControl>
+                    <TextBox Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Watermark="Character name" />
+                </controls:SettingsDisplayer.InteractionControl>
+
+            </controls:SettingsDisplayer>
+            
+            <controls:SettingsDisplayer Title="Character description"
+                                        Description="Description of the character to add"
+                                        Icon="ImageDescription">
+
+                <controls:SettingsDisplayer.InteractionControl>
+                    <TextBox Text="{Binding Description}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Watermark="Description"/>
+                </controls:SettingsDisplayer.InteractionControl>
+
+            </controls:SettingsDisplayer>
+            
+            <Button Click="Save_OnClick" Content="Add character" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="32"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

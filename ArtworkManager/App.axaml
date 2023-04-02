@@ -1,0 +1,47 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:view="clr-namespace:Nein.View;assembly=Nein"
+             x:Class="ArtworkManager.App">
+    <Application.DataTemplates>
+        <view:ViewLocator />
+    </Application.DataTemplates>
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://ArtworkManager/Styles/Accents/AccentColors.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Color x:Key="BaseColor">#FA282C34</Color>
+            <Color x:Key="AcrylicBaseColor">#5F000000</Color>
+            <Color x:Key="AcrylicSecondaryColor">#9F000000</Color>
+            <Color x:Key="SecondaryColor">#FA21252B</Color>
+            <Color x:Key="AccentColor">#FFFFCC22</Color>
+            <Color x:Key="ControlsButtonColor">#FF21252B</Color>
+            <Color x:Key="SidemenuButtonsGlow">#FFFFE48A</Color>
+            <Color x:Key="SliderThumbColor">#FFFFFFFF</Color>
+            <Color x:Key="ButtonBackgroundColor">#7F000000</Color>
+            <FontWeight x:Key="SmallerFontWeight">Medium</FontWeight>
+            <FontWeight x:Key="DefaultFontWeight">SemiBold</FontWeight>
+            <FontWeight x:Key="BiggerFontWeight">Bold</FontWeight>
+            
+            <SolidColorBrush x:Key="DataGridColumnHeaderForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="#9F000000" />
+
+            <SolidColorBrush x:Key="ProgressbarColorBrush" Color="{DynamicResource ProgressbarColor}" />
+            <SolidColorBrush x:Key="ButtonBackground" Color="#4C000000" />
+
+            <Color x:Key="AppBackgroundColor">Black</Color>
+
+            <FontFamily x:Key="Montserrat">/Resources/Fonts/#Montserrat</FontFamily>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+    <Application.Styles>
+        <FluentTheme Mode="Dark" />
+        
+        <StyleInclude Source="avares://ArtworkManager/Styles/FluentDark.axaml" />
+        <StyleInclude Source="avares://Material.Icons.Avalonia/App.xaml" />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+    </Application.Styles>
+</Application>

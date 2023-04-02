@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="ArtworkManager/App.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/MainWindow.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Styles/Accents/Base.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Styles/Accents/FluentControlResourcesDark.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Styles/FluentDark.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Styles/FlyoutStyle.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Styles/SliderStyle.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/UI Extensions/MessageBoxWindow.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Views/AddArtworkView.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Views/AddCharacterView.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Views/ArtworkBrowserView.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Views/HomeView.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Windows/FullscreenWindow.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+        <entry key="ArtworkManager/Windows/MainWindow.axaml" value="ArtworkManager/ArtworkManager.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,81 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Nein.Controls;assembly=Nein"
+             xmlns:views="clr-namespace:ArtworkManager.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ArtworkManager.Views.AddArtworkView">
+    
+    <Design.DataContext>
+        <views:AddArtworkViewModel/>
+    </Design.DataContext>
+    
+    <Grid>
+        <StackPanel Spacing="1" Margin="10">
+            <controls:SettingsTitleDisplayer Title="Add an artwork to the Database" Icon="ImageAdd" />
+            
+            <controls:SettingsDisplayer Title="Artworkname"
+                                        Description="Name of the artwork"
+                                        Icon="Image">
+
+                <controls:SettingsDisplayer.InteractionControl>
+                    <TextBox Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Watermark="Artworkname" />
+                </controls:SettingsDisplayer.InteractionControl>
+
+            </controls:SettingsDisplayer>
+            
+            <controls:SettingsDisplayer Title="Artwork description"
+                                        Description="Description of the artwork"
+                                        Icon="ImageDescription">
+
+                <controls:SettingsDisplayer.InteractionControl>
+                    <TextBox Text="{Binding Description}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Watermark="Description"/>
+                </controls:SettingsDisplayer.InteractionControl>
+
+            </controls:SettingsDisplayer>
+            
+            <controls:SettingsDisplayer Title="Select artwork file"
+                                        Description="{Binding ArtworkFilePath}"
+                                        Icon="FileImageAdd">
+
+                <controls:SettingsDisplayer.InteractionControl>
+                    <Button Click="SelectArtwork_OnClick" Content="select artwork" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </controls:SettingsDisplayer.InteractionControl>
+
+            </controls:SettingsDisplayer>
+            
+            <controls:SettingsDisplayer Title="Artwork Type"
+                                        Description="Is the artwork an image, video or something else?"
+                                        Icon="FileJpgBox">
+
+                <controls:SettingsDisplayer.InteractionControl>
+                    <ComboBox Items="{Binding ArtworkTypes}" SelectedItem="{Binding ArtworkType}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </controls:SettingsDisplayer.InteractionControl>
+
+            </controls:SettingsDisplayer>
+            
+            <controls:SettingsDisplayer Title="Artwork Acquired Type "
+                                        Description="How did you acquired this artwork"
+                                        Icon="Send">
+
+                <controls:SettingsDisplayer.InteractionControl>
+                    <ComboBox Items="{Binding ArtworkAcquiredTypes}" SelectedItem="{Binding ArtworkAcquiredType}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </controls:SettingsDisplayer.InteractionControl>
+
+            </controls:SettingsDisplayer>
+            
+            <controls:SettingsDisplayer Title="NSFW "
+                                        Description="Is this artwork NSFW (Not Safe for Work) or very suggestive?"
+                                        Icon="AlertCircle">
+
+                <controls:SettingsDisplayer.InteractionControl>
+                    <ToggleSwitch IsChecked="{Binding IsNsfw}" VerticalAlignment="Center"/>
+                </controls:SettingsDisplayer.InteractionControl>
+
+            </controls:SettingsDisplayer>
+            
+            <Button Click="Save_OnClick" Content="Add artwork" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="32"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

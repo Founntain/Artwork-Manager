@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtworkManager", "ArtworkManager\ArtworkManager.csproj", "{C702155A-5805-42F9-9057-517474876E08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtworkManager.Data", "ArtworkManager.Data\ArtworkManager.Data.csproj", "{459F7E79-124F-4140-9440-8B8D4E2A8A64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtworkManager.Extensions", "ArtworkManager.Extensions\ArtworkManager.Extensions.csproj", "{80748896-A1FF-496D-81C6-17219BA9CC41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C702155A-5805-42F9-9057-517474876E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C702155A-5805-42F9-9057-517474876E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C702155A-5805-42F9-9057-517474876E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C702155A-5805-42F9-9057-517474876E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{459F7E79-124F-4140-9440-8B8D4E2A8A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{459F7E79-124F-4140-9440-8B8D4E2A8A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{459F7E79-124F-4140-9440-8B8D4E2A8A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{459F7E79-124F-4140-9440-8B8D4E2A8A64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80748896-A1FF-496D-81C6-17219BA9CC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80748896-A1FF-496D-81C6-17219BA9CC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80748896-A1FF-496D-81C6-17219BA9CC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80748896-A1FF-496D-81C6-17219BA9CC41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

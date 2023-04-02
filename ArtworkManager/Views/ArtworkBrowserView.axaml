@@ -1,0 +1,41 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:ArtworkManager.Views"
+             xmlns:extensions="clr-namespace:ArtworkManager.Extensions;assembly=ArtworkManager.Extensions"
+             xmlns:converter="clr-namespace:ArtworkManager.Extensions.Converter;assembly=ArtworkManager.Extensions"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ArtworkManager.Views.ArtworkBrowserView">
+    
+    <Design.DataContext>
+        <views:ArtworkBrowserViewModel />
+    </Design.DataContext>
+    
+    <UserControl.Resources>
+        <converter:FilepathToImageConverter x:Key="FilepathToImageConverter" />
+    </UserControl.Resources>
+    
+    <Grid ColumnDefinitions="75*, 25*" RowDefinitions="Auto, *" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <DataGrid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Items="{Binding Artworks}" SelectedItem="{Binding SelectedArtwork}" AutoGenerateColumns="False" CanUserReorderColumns="True" CanUserSortColumns="True"
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  RowBackground="{DynamicResource AcrylicBaseColor}">
+            <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                    <DataGridCheckBoxColumn Header="Is Nsfw" Binding="{Binding IsNsfw}" />
+                    <DataGridTextColumn Header="Artwork Type" Binding="{Binding ArtworkType}" />
+                    <DataGridTextColumn Header="Artwork Acquired Type" Binding="{Binding ArtworkAcquiredType}" />
+                    <DataGridTextColumn Header="Filepath" Binding="{Binding Filepath}" />
+                </DataGrid.Columns>
+        </DataGrid>
+        
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Button Content="View Fullscreen" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" FontWeight="Bold" FontSize="24" Click="OpenFullscreen_OnClick" />
+        </Grid>
+        
+        
+        <Image Grid.Column="1" Grid.Row="1" RenderOptions.BitmapInterpolationMode="MediumQuality" Stretch="Uniform" Source="{Binding SelectedArtwork.Filepath, Converter={StaticResource FilepathToImageConverter}}"/>
+    </Grid>
+</UserControl>
